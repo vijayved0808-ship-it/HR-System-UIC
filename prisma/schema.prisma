@@ -1,0 +1,85 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Tenant {
+  id         String      @id @default(cuid())
+  name       String
+  users      User[]
+  jobs       Job[]
+  candidates Candidate[]
+  createdAt  DateTime    @default(now())
+}
+
+model User {
+  id       String @id @default(cuid())
+  email    String @unique
+  name     String
+  password String
+  role     Role   @default(RECRUITER)
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+  tenantId String
+  createdAt DateTime @default(now())
+}
+
+enum Role {
+  ADMIN
+  RECRUITER
+  CLIENT
+}
+
+model Job {
+  id          String           @id @default(cuid())
+  title       String
+  description String           @db.Text
+  status      String           @default("OPEN")
+  skills      String[]
+  minSalary   Int?
+  maxSalary   Int?
+  location    String?
+  tenant      Tenant           @relation(fields: [tenantId], references: [id])
+  tenantId    String
+  candidates  CandidateOnJob[]
+  createdAt   DateTime         @default(now())
+
+  @@index([tenantId, status])
+}
+
+model Candidate {
+  id         String           @id @default(cuid())
+  name       String
+  email      String
+  phone      String?
+  resumeUrl  String?
+  resumeText String?          @db.Text
+  skills     String[]
+  experience Int?
+  location   String?
+  aiScore    Float?
+  aiSummary  String?          @db.Text
+  tenant     Tenant           @relation(fields: [tenantId], references: [id])
+  tenantId   String
+  jobs       CandidateOnJob[]
+  createdAt  DateTime         @default(now())
+
+  @@index([tenantId])
+}
+
+model CandidateOnJob {
+  id           String    @id @default(cuid())
+  candidate    Candidate @relation(fields: [candidateId], references: [id])
+  candidateId  String
+  job          Job       @relation(fields: [jobId], references: [id])
+  jobId        String
+  stage        String    @default("Applied")
+  aiMatchScore Float?
+  updatedAt    DateTime  @updatedAt
+
+  @@unique([candidateId, jobId])
+  @@index([jobId, stage])
+}
