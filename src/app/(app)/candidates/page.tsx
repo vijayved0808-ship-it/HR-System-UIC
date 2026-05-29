@@ -12,65 +12,40 @@ export default async function CandidatesPage() {
   });
 
   return (
-    <div className="max-w-6xl">
-      <div className="flex justify-between items-center mb-8">
+    <div style={{ maxWidth: "1200px" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "2rem" }}>
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Candidates</h1>
-          <p className="text-gray-600">Saare applicants ki list</p>
+          <h1 style={{ fontSize: "1.875rem", fontWeight: "bold" }}>Candidates</h1>
+          <p style={{ color: "#6b7280" }}>All applicants</p>
         </div>
-        <Link href="/candidates/new" className="btn btn-primary">
-          + Add Candidate
-        </Link>
+        <Link href="/candidates/new" className="btn btn-primary">+ Add Candidate</Link>
       </div>
 
       {candidates.length === 0 ? (
-        <div className="card text-center py-12">
-          <p className="text-gray-500 mb-4">Abhi koi candidate nahi hai</p>
-          <Link href="/candidates/new" className="btn btn-primary">
-            Pehla Candidate Add Karo
-          </Link>
+        <div className="card" style={{ textAlign: "center", padding: "3rem" }}>
+          <p style={{ color: "#6b7280", marginBottom: "1rem" }}>Abhi koi candidate nahi</p>
+          <Link href="/candidates/new" className="btn btn-primary">Pehla Add Karo</Link>
         </div>
       ) : (
-        <div className="card overflow-hidden p-0">
-          <table className="w-full">
-            <thead className="bg-gray-50 border-b border-gray-200">
+        <div className="card" style={{ padding: 0, overflow: "hidden" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse" }}>
+            <thead style={{ background: "#f9fafb", borderBottom: "1px solid #e5e7eb" }}>
               <tr>
-                <th className="text-left text-xs font-medium text-gray-700 uppercase px-4 py-3">
-                  Name
-                </th>
-                <th className="text-left text-xs font-medium text-gray-700 uppercase px-4 py-3">
-                  Email
-                </th>
-                <th className="text-left text-xs font-medium text-gray-700 uppercase px-4 py-3">
-                  Phone
-                </th>
-                <th className="text-left text-xs font-medium text-gray-700 uppercase px-4 py-3">
-                  Experience
-                </th>
-                <th className="text-left text-xs font-medium text-gray-700 uppercase px-4 py-3">
-                  Location
-                </th>
+                <th style={{ textAlign: "left", fontSize: "0.75rem", fontWeight: 500, textTransform: "uppercase", padding: "0.75rem 1rem" }}>Name</th>
+                <th style={{ textAlign: "left", fontSize: "0.75rem", fontWeight: 500, textTransform: "uppercase", padding: "0.75rem 1rem" }}>Email</th>
+                <th style={{ textAlign: "left", fontSize: "0.75rem", fontWeight: 500, textTransform: "uppercase", padding: "0.75rem 1rem" }}>Phone</th>
+                <th style={{ textAlign: "left", fontSize: "0.75rem", fontWeight: 500, textTransform: "uppercase", padding: "0.75rem 1rem" }}>Experience</th>
+                <th style={{ textAlign: "left", fontSize: "0.75rem", fontWeight: 500, textTransform: "uppercase", padding: "0.75rem 1rem" }}>Location</th>
               </tr>
             </thead>
             <tbody>
               {candidates.map((c) => (
-                <tr
-                  key={c.id}
-                  className="border-b border-gray-100 hover:bg-gray-50"
-                >
-                  <td className="px-4 py-3 font-medium text-gray-900">
-                    {c.name}
-                  </td>
-                  <td className="px-4 py-3 text-sm text-gray-600">{c.email}</td>
-                  <td className="px-4 py-3 text-sm text-gray-600">
-                    {c.phone || "-"}
-                  </td>
-                  <td className="px-4 py-3 text-sm text-gray-600">
-                    {c.experience || 0} years
-                  </td>
-                  <td className="px-4 py-3 text-sm text-gray-600">
-                    {c.location || "-"}
-                  </td>
+                <tr key={c.id} style={{ borderBottom: "1px solid #f3f4f6" }}>
+                  <td style={{ padding: "0.75rem 1rem", fontWeight: 500 }}>{c.name}</td>
+                  <td style={{ padding: "0.75rem 1rem", fontSize: "0.875rem", color: "#6b7280" }}>{c.email}</td>
+                  <td style={{ padding: "0.75rem 1rem", fontSize: "0.875rem", color: "#6b7280" }}>{c.phone || "-"}</td>
+                  <td style={{ padding: "0.75rem 1rem", fontSize: "0.875rem", color: "#6b7280" }}>{c.experience || 0} years</td>
+                  <td style={{ padding: "0.75rem 1rem", fontSize: "0.875rem", color: "#6b7280" }}>{c.location || "-"}</td>
                 </tr>
               ))}
             </tbody>

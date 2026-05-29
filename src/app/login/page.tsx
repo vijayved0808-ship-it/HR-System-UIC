@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function LoginPage({
   searchParams,
 }: {
-  searchParams: { error?: string };
+  searchParams: { error?: string; signup?: string };
 }) {
   async function login(formData: FormData) {
     "use server";
@@ -16,59 +16,45 @@ export default function LoginPage({
         redirectTo: "/dashboard",
       });
     } catch (error: any) {
-      if (error.message?.includes("NEXT_REDIRECT")) throw error;
+      if (error?.message?.includes("NEXT_REDIRECT")) throw error;
       redirect("/login?error=invalid");
     }
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
-      <div className="w-full max-w-md">
+    <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", padding: "1rem" }}>
+      <div style={{ width: "100%", maxWidth: "400px" }}>
         <div className="card">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">UIC HR System</h1>
-          <p className="text-gray-600 mb-6">Login karke aage badho</p>
+          <h1 style={{ fontSize: "1.5rem", fontWeight: "bold", marginBottom: "0.5rem" }}>UIC HR System</h1>
+          <p style={{ color: "#6b7280", marginBottom: "1.5rem" }}>Login karke aage badho</p>
+
+          {searchParams.signup === "success" && (
+            <div style={{ background: "#dcfce7", color: "#166534", padding: "0.5rem 1rem", borderRadius: "0.5rem", marginBottom: "1rem", fontSize: "0.875rem" }}>
+              Account ban gaya! Ab login karo.
+            </div>
+          )}
 
           {searchParams.error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-2 rounded-lg mb-4 text-sm">
+            <div style={{ background: "#fee2e2", color: "#991b1b", padding: "0.5rem 1rem", borderRadius: "0.5rem", marginBottom: "1rem", fontSize: "0.875rem" }}>
               Galat email ya password
             </div>
           )}
 
-          <form action={login} className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Email
-              </label>
-              <input
-                type="email"
-                name="email"
-                required
-                className="input"
-                placeholder="admin@example.com"
-              />
+          <form action={login}>
+            <div style={{ marginBottom: "1rem" }}>
+              <label style={{ display: "block", fontSize: "0.875rem", fontWeight: 500, marginBottom: "0.25rem" }}>Email</label>
+              <input type="email" name="email" required className="input" placeholder="admin@example.com" />
             </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Password
-              </label>
-              <input
-                type="password"
-                name="password"
-                required
-                className="input"
-                placeholder="••••••••"
-              />
+            <div style={{ marginBottom: "1rem" }}>
+              <label style={{ display: "block", fontSize: "0.875rem", fontWeight: 500, marginBottom: "0.25rem" }}>Password</label>
+              <input type="password" name="password" required className="input" />
             </div>
-            <button type="submit" className="btn btn-primary w-full">
-              Login
-            </button>
+            <button type="submit" className="btn btn-primary" style={{ width: "100%" }}>Login</button>
           </form>
 
-          <div className="mt-4 text-center text-sm text-gray-600">
+          <div style={{ marginTop: "1rem", textAlign: "center", fontSize: "0.875rem", color: "#6b7280" }}>
             New user?{" "}
-            <Link href="/signup" className="text-brand-600 hover:underline">
-              Account banao
-            </Link>
+            <Link href="/signup" style={{ color: "#4f46e5" }}>Account banao</Link>
           </div>
         </div>
       </div>

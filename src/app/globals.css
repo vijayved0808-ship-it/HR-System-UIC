@@ -2,33 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: 255 255 255;
-  --foreground: 17 24 39;
-}
-
 body {
-  color: rgb(var(--foreground));
-  background: rgb(var(--background));
   font-family: system-ui, -apple-system, sans-serif;
+  background: #f9fafb;
+  color: #111827;
 }
 
 .btn {
-  @apply px-4 py-2 rounded-lg font-medium transition;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.15s;
+  display: inline-block;
 }
-
 .btn-primary {
-  @apply bg-brand-600 text-white hover:bg-brand-700;
+  background: #4f46e5;
+  color: white;
 }
-
+.btn-primary:hover {
+  background: #4338ca;
+}
 .btn-secondary {
-  @apply bg-gray-100 text-gray-700 hover:bg-gray-200;
+  background: #e5e7eb;
+  color: #374151;
 }
-
+.btn-secondary:hover {
+  background: #d1d5db;
+}
 .input {
-  @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
 }
-
+.input:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
 .card {
-  @apply bg-white border border-gray-200 rounded-xl p-6 shadow-sm;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
 }

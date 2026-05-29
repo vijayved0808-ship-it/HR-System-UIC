@@ -1,122 +1,48 @@
 import { createCandidate } from "@/lib/actions/candidate";
-import { redirect } from "next/navigation";
 import Link from "next/link";
 
 export default function NewCandidatePage() {
-  async function action(formData: FormData) {
-    "use server";
-    await createCandidate(formData);
-    redirect("/candidates");
-  }
-
   return (
-    <div className="max-w-2xl">
-      <Link
-        href="/candidates"
-        className="text-sm text-gray-600 hover:text-gray-900"
-      >
-        ← Back to Candidates
-      </Link>
-      <h1 className="text-3xl font-bold text-gray-900 mt-2 mb-8">
-        Naya Candidate Add Karo
-      </h1>
+    <div style={{ maxWidth: "600px" }}>
+      <Link href="/candidates" style={{ fontSize: "0.875rem", color: "#6b7280" }}>← Back to Candidates</Link>
+      <h1 style={{ fontSize: "1.875rem", fontWeight: "bold", marginTop: "0.5rem", marginBottom: "2rem" }}>Naya Candidate</h1>
 
-      <form action={action} className="card space-y-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Name *
-          </label>
-          <input
-            type="text"
-            name="name"
-            required
-            className="input"
-            placeholder="Ravi Kumar"
-          />
+      <form action={createCandidate} className="card">
+        <div style={{ marginBottom: "1rem" }}>
+          <label style={{ display: "block", fontSize: "0.875rem", fontWeight: 500, marginBottom: "0.25rem" }}>Name *</label>
+          <input type="text" name="name" required className="input" placeholder="Ravi Kumar" />
         </div>
-
-        <div className="grid grid-cols-2 gap-4">
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "1rem" }}>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Email *
-            </label>
-            <input
-              type="email"
-              name="email"
-              required
-              className="input"
-              placeholder="ravi@example.com"
-            />
+            <label style={{ display: "block", fontSize: "0.875rem", fontWeight: 500, marginBottom: "0.25rem" }}>Email *</label>
+            <input type="email" name="email" required className="input" placeholder="ravi@example.com" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Phone
-            </label>
-            <input
-              type="tel"
-              name="phone"
-              className="input"
-              placeholder="+91 98765 43210"
-            />
+            <label style={{ display: "block", fontSize: "0.875rem", fontWeight: 500, marginBottom: "0.25rem" }}>Phone</label>
+            <input type="tel" name="phone" className="input" placeholder="+91 98765..." />
           </div>
         </div>
-
-        <div className="grid grid-cols-2 gap-4">
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "1rem" }}>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Location
-            </label>
-            <input
-              type="text"
-              name="location"
-              className="input"
-              placeholder="Ahmedabad"
-            />
+            <label style={{ display: "block", fontSize: "0.875rem", fontWeight: 500, marginBottom: "0.25rem" }}>Location</label>
+            <input type="text" name="location" className="input" placeholder="Ahmedabad" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Experience (years)
-            </label>
-            <input
-              type="number"
-              name="experience"
-              className="input"
-              placeholder="3"
-            />
+            <label style={{ display: "block", fontSize: "0.875rem", fontWeight: 500, marginBottom: "0.25rem" }}>Experience (years)</label>
+            <input type="number" name="experience" className="input" placeholder="3" />
           </div>
         </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Skills (comma separated)
-          </label>
-          <input
-            type="text"
-            name="skills"
-            className="input"
-            placeholder="React, TypeScript, Node.js"
-          />
+        <div style={{ marginBottom: "1rem" }}>
+          <label style={{ display: "block", fontSize: "0.875rem", fontWeight: 500, marginBottom: "0.25rem" }}>Skills (comma separated)</label>
+          <input type="text" name="skills" className="input" placeholder="React, TypeScript" />
         </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Resume / Bio
-          </label>
-          <textarea
-            name="resumeText"
-            rows={5}
-            className="input"
-            placeholder="Candidate ke baare mein detail..."
-          />
+        <div style={{ marginBottom: "1rem" }}>
+          <label style={{ display: "block", fontSize: "0.875rem", fontWeight: 500, marginBottom: "0.25rem" }}>Resume / Bio</label>
+          <textarea name="resumeText" rows={5} className="input" placeholder="Detail..." />
         </div>
-
-        <div className="flex gap-3 pt-4">
-          <button type="submit" className="btn btn-primary">
-            Add Candidate
-          </button>
-          <Link href="/candidates" className="btn btn-secondary">
-            Cancel
-          </Link>
+        <div style={{ display: "flex", gap: "0.75rem", paddingTop: "1rem" }}>
+          <button type="submit" className="btn btn-primary">Add Candidate</button>
+          <Link href="/candidates" className="btn btn-secondary">Cancel</Link>
         </div>
       </form>
     </div>

@@ -9,8 +9,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
     Credentials({
       credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" },
+        email: {},
+        password: {},
       },
       authorize: async (creds) => {
         if (!creds?.email || !creds?.password) return null;
@@ -26,7 +26,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           name: user.name,
           role: user.role,
           tenantId: user.tenantId,
-        };
+        } as any;
       },
     }),
   ],

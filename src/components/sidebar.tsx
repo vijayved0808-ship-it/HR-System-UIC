@@ -4,48 +4,69 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const navItems = [
-  { href: "/dashboard", label: "Dashboard", icon: "🏠" },
-  { href: "/jobs", label: "Jobs", icon: "💼" },
-  { href: "/candidates", label: "Candidates", icon: "👥" },
+  { href: "/dashboard", label: "Dashboard" },
+  { href: "/jobs", label: "Jobs" },
+  { href: "/candidates", label: "Candidates" },
 ];
 
 export default function Sidebar({ userName }: { userName: string }) {
   const pathname = usePathname();
 
   return (
-    <aside className="w-64 bg-white border-r border-gray-200 min-h-screen p-4 flex flex-col">
-      <div className="mb-8 px-2">
-        <h1 className="text-xl font-bold text-gray-900">UIC HR</h1>
-        <p className="text-xs text-gray-500">Recruitment System</p>
+    <aside style={{
+      width: "240px",
+      background: "white",
+      borderRight: "1px solid #e5e7eb",
+      minHeight: "100vh",
+      padding: "1rem",
+      display: "flex",
+      flexDirection: "column",
+    }}>
+      <div style={{ marginBottom: "2rem", padding: "0 0.5rem" }}>
+        <h1 style={{ fontSize: "1.25rem", fontWeight: "bold" }}>UIC HR</h1>
+        <p style={{ fontSize: "0.75rem", color: "#6b7280" }}>Recruitment System</p>
       </div>
 
-      <nav className="space-y-1 flex-1">
+      <nav style={{ flex: 1 }}>
         {navItems.map((item) => {
           const active = pathname === item.href || pathname?.startsWith(item.href + "/");
           return (
             <Link
               key={item.href}
               href={item.href}
-              className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition ${
-                active
-                  ? "bg-brand-50 text-brand-700"
-                  : "text-gray-700 hover:bg-gray-50"
-              }`}
+              style={{
+                display: "block",
+                padding: "0.5rem 0.75rem",
+                borderRadius: "0.5rem",
+                fontSize: "0.875rem",
+                fontWeight: 500,
+                marginBottom: "0.25rem",
+                background: active ? "#eef2ff" : "transparent",
+                color: active ? "#4338ca" : "#374151",
+                textDecoration: "none",
+              }}
             >
-              <span>{item.icon}</span>
               {item.label}
             </Link>
           );
         })}
       </nav>
 
-      <div className="pt-4 border-t border-gray-200">
-        <div className="px-3 py-2">
-          <p className="text-sm font-medium text-gray-900">{userName}</p>
-          <form action="/api/auth/signout" method="post">
+      <div style={{ paddingTop: "1rem", borderTop: "1px solid #e5e7eb" }}>
+        <div style={{ padding: "0 0.75rem" }}>
+          <p style={{ fontSize: "0.875rem", fontWeight: 500 }}>{userName}</p>
+          <form action="/api/auth/signout" method="POST">
             <button
               type="submit"
-              className="text-xs text-gray-500 hover:text-gray-700 mt-1"
+              style={{
+                fontSize: "0.75rem",
+                color: "#6b7280",
+                marginTop: "0.25rem",
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                padding: 0,
+              }}
             >
               Logout
             </button>

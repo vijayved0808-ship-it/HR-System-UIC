@@ -2,20 +2,21 @@
 
 import { prisma } from "@/lib/db";
 import bcrypt from "bcryptjs";
+import { redirect } from "next/navigation";
 
-export async function seedInitialUser(formData: FormData) {
+export async function signupAction(formData: FormData) {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
   const name = formData.get("name") as string;
   const companyName = formData.get("companyName") as string;
 
   if (!email || !password || !name || !companyName) {
-    return { error: "Saari fields fill karo" };
+    redirect("/signup?error=Saari+fields+fill+karo");
   }
 
   const existing = await prisma.user.findUnique({ where: { email } });
   if (existing) {
-    return { error: "Ye email already registered hai" };
+    redirect("/signup?error=Email+already+registered");
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -34,5 +35,5 @@ export async function seedInitialUser(formData: FormData) {
     },
   });
 
-  return { success: true };
+  redirect("/login?signup=success");
 }

@@ -11,50 +11,22 @@ export async function createCandidate(formData: FormData) {
 
   const tenantId = (session.user as any).tenantId;
 
-  const candidate = await prisma.candidate.create({
+  await prisma.candidate.create({
     data: {
       name: formData.get("name") as string,
       email: formData.get("email") as string,
-      phone: formData.get("phone") as string,
-      location: formData.get("location") as string,
+      phone: (formData.get("phone") as string) || null,
+      location: (formData.get("location") as string) || null,
       experience: parseInt(formData.get("experience") as string) || 0,
       skills: ((formData.get("skills") as string) || "")
         .split(",")
         .map((s) => s.trim())
         .filter(Boolean),
-      resumeText: (formData.get("resumeText") as string) || "",
+      resumeText: (formData.get("resumeText") as string) || null,
       tenantId,
     },
   });
 
   revalidatePath("/candidates");
-  return candidate;
-}
-
-export async function moveCandidateStage(
-  candidateId: string,
-  jobId: string,
-  stage: string
-) {
-  const session = await auth();
-  if (!session) throw new Error("Unauthorized");
-
-  await prisma.candidateOnJob.upsert({
-    where: { candidateId_jobId: { candidateId, jobId } },
-    update: { stage },
-    create: { candidateId, jobId, stage },
-  });
-
-  revalidatePath(`/jobs/${jobId}`);
-}
-
-export async function assignCandidateToJob(candidateId: string, jobId: string) {
-  const session = await auth();
-  if (!session) throw new Error("Unauthorized");
-
-  await prisma.candidateOnJob.create({
-    data: { candidateId, jobId, stage: "Applied" },
-  });
-
-  revalidatePath(`/jobs/${jobId}`);
+  redirect("/candidates");
 }

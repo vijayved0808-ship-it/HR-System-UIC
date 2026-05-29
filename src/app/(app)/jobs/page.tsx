@@ -13,62 +13,47 @@ export default async function JobsPage() {
   });
 
   return (
-    <div className="max-w-6xl">
-      <div className="flex justify-between items-center mb-8">
+    <div style={{ maxWidth: "1200px" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem" }}>
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Jobs</h1>
-          <p className="text-gray-600">Saari open positions yahan</p>
+          <h1 style={{ fontSize: "1.875rem", fontWeight: "bold" }}>Jobs</h1>
+          <p style={{ color: "#6b7280" }}>Open positions</p>
         </div>
-        <Link href="/jobs/new" className="btn btn-primary">
-          + New Job
-        </Link>
+        <Link href="/jobs/new" className="btn btn-primary">+ New Job</Link>
       </div>
 
       {jobs.length === 0 ? (
-        <div className="card text-center py-12">
-          <p className="text-gray-500 mb-4">Abhi koi job nahi hai</p>
-          <Link href="/jobs/new" className="btn btn-primary">
-            Pehli Job Banao
-          </Link>
+        <div className="card" style={{ textAlign: "center", padding: "3rem" }}>
+          <p style={{ color: "#6b7280", marginBottom: "1rem" }}>Abhi koi job nahi</p>
+          <Link href="/jobs/new" className="btn btn-primary">Pehli Job Banao</Link>
         </div>
       ) : (
-        <div className="grid gap-4">
+        <div style={{ display: "grid", gap: "1rem" }}>
           {jobs.map((job) => (
-            <Link
-              key={job.id}
-              href={`/jobs/${job.id}`}
-              className="card hover:shadow-md transition"
-            >
-              <div className="flex justify-between items-start">
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-gray-900">
-                    {job.title}
-                  </h3>
-                  <p className="text-sm text-gray-600 mt-1">
-                    {job.location || "Location N/A"}
-                  </p>
-                  <div className="flex gap-2 mt-3 flex-wrap">
+            <Link key={job.id} href={`/jobs/${job.id}`} className="card" style={{ textDecoration: "none", color: "inherit", display: "block" }}>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <div>
+                  <h3 style={{ fontSize: "1.125rem", fontWeight: 600 }}>{job.title}</h3>
+                  <p style={{ fontSize: "0.875rem", color: "#6b7280", marginTop: "0.25rem" }}>{job.location || "N/A"}</p>
+                  <div style={{ display: "flex", gap: "0.5rem", marginTop: "0.75rem", flexWrap: "wrap" }}>
                     {job.skills.slice(0, 5).map((skill) => (
-                      <span
-                        key={skill}
-                        className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded"
-                      >
+                      <span key={skill} style={{ fontSize: "0.75rem", background: "#f3f4f6", padding: "0.25rem 0.5rem", borderRadius: "0.25rem" }}>
                         {skill}
                       </span>
                     ))}
                   </div>
                 </div>
-                <div className="text-right">
-                  <span
-                    className={`text-xs px-2 py-1 rounded ${
-                      job.status === "OPEN"
-                        ? "bg-green-100 text-green-700"
-                        : "bg-gray-100 text-gray-700"
-                    }`}
-                  >
+                <div style={{ textAlign: "right" }}>
+                  <span style={{
+                    fontSize: "0.75rem",
+                    padding: "0.25rem 0.5rem",
+                    borderRadius: "0.25rem",
+                    background: job.status === "OPEN" ? "#dcfce7" : "#f3f4f6",
+                    color: job.status === "OPEN" ? "#166534" : "#374151",
+                  }}>
                     {job.status}
                   </span>
-                  <p className="text-sm text-gray-600 mt-2">
+                  <p style={{ fontSize: "0.875rem", color: "#6b7280", marginTop: "0.5rem" }}>
                     {job._count.candidates} applicants
                   </p>
                 </div>

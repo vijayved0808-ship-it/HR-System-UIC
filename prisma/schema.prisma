@@ -17,13 +17,13 @@ model Tenant {
 }
 
 model User {
-  id       String @id @default(cuid())
-  email    String @unique
-  name     String
-  password String
-  role     Role   @default(RECRUITER)
-  tenant   Tenant @relation(fields: [tenantId], references: [id])
-  tenantId String
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  password  String
+  role      Role     @default(RECRUITER)
+  tenant    Tenant   @relation(fields: [tenantId], references: [id])
+  tenantId  String
   createdAt DateTime @default(now())
 }
 
@@ -36,7 +36,7 @@ enum Role {
 model Job {
   id          String           @id @default(cuid())
   title       String
-  description String           @db.Text
+  description String
   status      String           @default("OPEN")
   skills      String[]
   minSalary   Int?
@@ -55,13 +55,10 @@ model Candidate {
   name       String
   email      String
   phone      String?
-  resumeUrl  String?
-  resumeText String?          @db.Text
+  resumeText String?
   skills     String[]
   experience Int?
   location   String?
-  aiScore    Float?
-  aiSummary  String?          @db.Text
   tenant     Tenant           @relation(fields: [tenantId], references: [id])
   tenantId   String
   jobs       CandidateOnJob[]
@@ -71,14 +68,13 @@ model Candidate {
 }
 
 model CandidateOnJob {
-  id           String    @id @default(cuid())
-  candidate    Candidate @relation(fields: [candidateId], references: [id])
-  candidateId  String
-  job          Job       @relation(fields: [jobId], references: [id])
-  jobId        String
-  stage        String    @default("Applied")
-  aiMatchScore Float?
-  updatedAt    DateTime  @updatedAt
+  id          String    @id @default(cuid())
+  candidate   Candidate @relation(fields: [candidateId], references: [id])
+  candidateId String
+  job         Job       @relation(fields: [jobId], references: [id])
+  jobId       String
+  stage       String    @default("Applied")
+  updatedAt   DateTime  @updatedAt
 
   @@unique([candidateId, jobId])
   @@index([jobId, stage])

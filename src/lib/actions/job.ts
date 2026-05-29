@@ -15,7 +15,7 @@ export async function createJob(formData: FormData) {
     data: {
       title: formData.get("title") as string,
       description: formData.get("description") as string,
-      location: formData.get("location") as string,
+      location: (formData.get("location") as string) || null,
       minSalary: parseInt(formData.get("minSalary") as string) || null,
       maxSalary: parseInt(formData.get("maxSalary") as string) || null,
       skills: ((formData.get("skills") as string) || "")
@@ -28,17 +28,4 @@ export async function createJob(formData: FormData) {
 
   revalidatePath("/jobs");
   redirect(`/jobs/${job.id}`);
-}
-
-export async function updateJobStatus(jobId: string, status: string) {
-  const session = await auth();
-  if (!session) throw new Error("Unauthorized");
-
-  await prisma.job.update({
-    where: { id: jobId },
-    data: { status },
-  });
-
-  revalidatePath("/jobs");
-  revalidatePath(`/jobs/${jobId}`);
 }
