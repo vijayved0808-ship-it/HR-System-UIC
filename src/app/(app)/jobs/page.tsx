@@ -17,15 +17,15 @@ export default async function JobsPage() {
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem" }}>
         <div>
           <h1 style={{ fontSize: "1.875rem", fontWeight: "bold" }}>Jobs</h1>
-          <p style={{ color: "#6b7280" }}>Open positions</p>
+          <p style={{ color: "#6b7280" }}>All open positions</p>
         </div>
         <Link href="/jobs/new" className="btn btn-primary">+ New Job</Link>
       </div>
 
       {jobs.length === 0 ? (
         <div className="card" style={{ textAlign: "center", padding: "3rem" }}>
-          <p style={{ color: "#6b7280", marginBottom: "1rem" }}>Abhi koi job nahi</p>
-          <Link href="/jobs/new" className="btn btn-primary">Pehli Job Banao</Link>
+          <p style={{ color: "#6b7280", marginBottom: "1rem" }}>No jobs yet</p>
+          <Link href="/jobs/new" className="btn btn-primary">Create First Job</Link>
         </div>
       ) : (
         <div style={{ display: "grid", gap: "1rem" }}>

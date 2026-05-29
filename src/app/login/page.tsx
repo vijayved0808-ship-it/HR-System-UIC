@@ -26,17 +26,17 @@ export default function LoginPage({
       <div style={{ width: "100%", maxWidth: "400px" }}>
         <div className="card">
           <h1 style={{ fontSize: "1.5rem", fontWeight: "bold", marginBottom: "0.5rem" }}>UIC HR System</h1>
-          <p style={{ color: "#6b7280", marginBottom: "1.5rem" }}>Login karke aage badho</p>
+          <p style={{ color: "#6b7280", marginBottom: "1.5rem" }}>Sign in to continue</p>
 
           {searchParams.signup === "success" && (
             <div style={{ background: "#dcfce7", color: "#166534", padding: "0.5rem 1rem", borderRadius: "0.5rem", marginBottom: "1rem", fontSize: "0.875rem" }}>
-              Account ban gaya! Ab login karo.
+              Account created successfully! Please sign in.
             </div>
           )}
 
           {searchParams.error && (
             <div style={{ background: "#fee2e2", color: "#991b1b", padding: "0.5rem 1rem", borderRadius: "0.5rem", marginBottom: "1rem", fontSize: "0.875rem" }}>
-              Galat email ya password
+              Invalid email or password
             </div>
           )}
 
@@ -49,12 +49,12 @@ export default function LoginPage({
               <label style={{ display: "block", fontSize: "0.875rem", fontWeight: 500, marginBottom: "0.25rem" }}>Password</label>
               <input type="password" name="password" required className="input" />
             </div>
-            <button type="submit" className="btn btn-primary" style={{ width: "100%" }}>Login</button>
+            <button type="submit" className="btn btn-primary" style={{ width: "100%" }}>Sign In</button>
           </form>
 
           <div style={{ marginTop: "1rem", textAlign: "center", fontSize: "0.875rem", color: "#6b7280" }}>
             New user?{" "}
-            <Link href="/signup" style={{ color: "#4f46e5" }}>Account banao</Link>
+            <Link href="/signup" style={{ color: "#4f46e5" }}>Create account</Link>
           </div>
         </div>
       </div>

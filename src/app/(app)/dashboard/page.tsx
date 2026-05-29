@@ -25,7 +25,7 @@ export default async function DashboardPage() {
     <div style={{ maxWidth: "1200px" }}>
       <h1 style={{ fontSize: "1.875rem", fontWeight: "bold", marginBottom: "0.5rem" }}>Dashboard</h1>
       <p style={{ color: "#6b7280", marginBottom: "2rem" }}>
-        Namaste {session?.user?.name}!
+        Welcome back, {session?.user?.name}!
       </p>
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "1rem", marginBottom: "2rem" }}>
@@ -51,7 +51,7 @@ export default async function DashboardPage() {
         <div className="card">
           <h2 style={{ fontSize: "1.125rem", fontWeight: 600, marginBottom: "1rem" }}>Recent Jobs</h2>
           {activeJobs.length === 0 ? (
-            <p style={{ color: "#6b7280", fontSize: "0.875rem" }}>Koi jobs nahi hain</p>
+            <p style={{ color: "#6b7280", fontSize: "0.875rem" }}>No jobs yet</p>
           ) : (
             <ul style={{ listStyle: "none", padding: 0 }}>
               {activeJobs.map((job) => (
@@ -72,7 +72,7 @@ export default async function DashboardPage() {
         <div className="card">
           <h2 style={{ fontSize: "1.125rem", fontWeight: 600, marginBottom: "1rem" }}>Recent Candidates</h2>
           {recentCandidates.length === 0 ? (
-            <p style={{ color: "#6b7280", fontSize: "0.875rem" }}>Koi candidates nahi hain</p>
+            <p style={{ color: "#6b7280", fontSize: "0.875rem" }}>No candidates yet</p>
           ) : (
             <ul style={{ listStyle: "none", padding: 0 }}>
               {recentCandidates.map((c) => (

@@ -5,7 +5,7 @@ export default function NewJobPage() {
   return (
     <div style={{ maxWidth: "600px" }}>
       <Link href="/jobs" style={{ fontSize: "0.875rem", color: "#6b7280" }}>← Back to Jobs</Link>
-      <h1 style={{ fontSize: "1.875rem", fontWeight: "bold", marginTop: "0.5rem", marginBottom: "2rem" }}>Nayi Job</h1>
+      <h1 style={{ fontSize: "1.875rem", fontWeight: "bold", marginTop: "0.5rem", marginBottom: "2rem" }}>New Job</h1>
 
       <form action={createJob} className="card">
         <div style={{ marginBottom: "1rem" }}>
@@ -14,7 +14,7 @@ export default function NewJobPage() {
         </div>
         <div style={{ marginBottom: "1rem" }}>
           <label style={{ display: "block", fontSize: "0.875rem", fontWeight: 500, marginBottom: "0.25rem" }}>Description *</label>
-          <textarea name="description" required rows={5} className="input" placeholder="Role ke baare mein..." />
+          <textarea name="description" required rows={5} className="input" placeholder="Describe the role..." />
         </div>
         <div style={{ marginBottom: "1rem" }}>
           <label style={{ display: "block", fontSize: "0.875rem", fontWeight: 500, marginBottom: "0.25rem" }}>Location</label>
@@ -35,7 +35,7 @@ export default function NewJobPage() {
           </div>
         </div>
         <div style={{ display: "flex", gap: "0.75rem", paddingTop: "1rem" }}>
-          <button type="submit" className="btn btn-primary">Job Banao</button>
+          <button type="submit" className="btn btn-primary">Create Job</button>
           <Link href="/jobs" className="btn btn-secondary">Cancel</Link>
         </div>
       </form>

@@ -11,7 +11,7 @@ export async function signupAction(formData: FormData) {
   const companyName = formData.get("companyName") as string;
 
   if (!email || !password || !name || !companyName) {
-    redirect("/signup?error=Saari+fields+fill+karo");
+    redirect("/signup?error=Please+fill+all+fields");
   }
 
   const existing = await prisma.user.findUnique({ where: { email } });

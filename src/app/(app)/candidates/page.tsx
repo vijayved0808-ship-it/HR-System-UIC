@@ -23,8 +23,8 @@ export default async function CandidatesPage() {
 
       {candidates.length === 0 ? (
         <div className="card" style={{ textAlign: "center", padding: "3rem" }}>
-          <p style={{ color: "#6b7280", marginBottom: "1rem" }}>Abhi koi candidate nahi</p>
-          <Link href="/candidates/new" className="btn btn-primary">Pehla Add Karo</Link>
+          <p style={{ color: "#6b7280", marginBottom: "1rem" }}>No candidates yet</p>
+          <Link href="/candidates/new" className="btn btn-primary">Add First Candidate</Link>
         </div>
       ) : (
         <div className="card" style={{ padding: 0, overflow: "hidden" }}>

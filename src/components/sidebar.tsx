@@ -68,7 +68,7 @@ export default function Sidebar({ userName }: { userName: string }) {
                 padding: 0,
               }}
             >
-              Logout
+              Sign out
             </button>
           </form>
         </div>
